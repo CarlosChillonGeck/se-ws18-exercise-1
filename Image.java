@@ -26,9 +26,18 @@ public class Image {
 	 * has position (0,0). Note: only consider the lower 24 bits of val).
 	 */
 	public void set(int x, int y, int val) {
-         // this is the formula to get location in the image buffer
+        /*
+	 * Explains how the &0xff operand works to transform colors to special formats:
+	 * https://oscarliang.com/what-s-the-use-of-and-0xff-in-programming-c-plus-p/
+	 */
          data[x*width*3 + y*3] = (byte)(val >> 16); // R bits
          data[x*width*3 + y*3 + 1] = (byte)((val >> 8 ) & 0xff); // G bits
          data[x*width*3 + y*3 + 2] = (byte)(val & 0xff); // B bits
-     }
+        }
+	
+	public void write(String filename) {
+ 		int MAX_VALUE = 255;
+		
+		
+	}
 }
