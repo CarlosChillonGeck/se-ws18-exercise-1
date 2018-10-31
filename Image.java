@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.io.FileWriter;
+import java.io.*;
 
 public class Image {
 
@@ -29,15 +29,41 @@ public class Image {
         /*
 	 * Explains how the &0xff operand works to transform colors to special formats:
 	 * https://oscarliang.com/what-s-the-use-of-and-0xff-in-programming-c-plus-p/
+	 * Code taken and explained to me by Student of Digital Engineering Vaddi Vamshi Krishna.
 	 */
-         data[x*width*3 + y*3] = (byte)(val >> 16); // R bits
-         data[x*width*3 + y*3 + 1] = (byte)((val >> 8 ) & 0xff); // G bits
-         data[x*width*3 + y*3 + 2] = (byte)(val & 0xff); // B bits
+         data[x*width*3 + y*3] = (byte)(val >> 16); 
+         data[x*width*3 + y*3 + 1] = (byte)((val >> 8 ) & 0xff); 
+         data[x*width*3 + y*3 + 2] = (byte)(val & 0xff); 
         }
 	
-	public void write(String filename) {
- 		int MAX_VALUE = 255;
-		
-		
-	}
+	/*
+	 * A method write( String filename ) which writes the 
+	 * image data to a file represented by filename. 
+	 * As image format, use the trivial PPM format with binary 
+	 * encoding (see http://netpbm.sourceforge.net/doc/ppm.html for 
+	 * the file structure).
+	 * 
+	 * Use Streams when you are dealing with raw data:
+	 * https://www.journaldev.com/878/java-write-to-file
+	 */
+ 		
+ 	public void write(String filename) throws IOException {
+ 	
+		FileOutputStream os = null;
+		try {
+		    	os = new FileOutputStream(new File("./OutputImage.txt"));
+			String header = ("P6\n" + width + "\n" + height + "\n255\n").getBytes();
+			os.write(header);
+			os.write(data);
+		} catch (IOException e) {
+		   	 e.printStackTrace();
+		}finally{
+		    try {
+			os.close();
+		    } catch (IOException e) {
+			e.printStackTrace();
+		  	}
+ 	}
+ 
+
 }
