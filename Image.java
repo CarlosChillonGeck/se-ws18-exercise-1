@@ -52,7 +52,7 @@ public class Image {
 		FileOutputStream os = null;
 		try {
 		    	os = new FileOutputStream(new File("./OutputImage.txt"));
-			String header = ("P6\n" + width + "\n" + height + "\n255\n").getBytes();
+			String header = ("P6\n" + width + "\n" + height + "\n255\n");
 			os.write(header);
 			os.write(data);
 		} catch (IOException e) {
