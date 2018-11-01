@@ -36,6 +36,7 @@ public class Image {
 	 * Explains how the &0xff operand works to transform colors to special formats:
 	 * https://oscarliang.com/what-s-the-use-of-and-0xff-in-programming-c-plus-p/
 	 * Code taken and explained to me by Student of Digital Engineering Vaddi Vamshi Krishna.
+	 *
 	 */
          data[x*width*3 + y*3] = (byte)(val >> 16); 
          data[x*width*3 + y*3 + 1] = (byte)((val >> 8 ) & 0xff); 
@@ -58,7 +59,8 @@ public class Image {
 		FileOutputStream os = null;
 		try {
 		    	os = new FileOutputStream(new File("./OutputImage.txt"));
-			String header = ("P6\n" + width + "\n" + height + "\n255\n");
+			String header = ("P6\n" + width + "\n" + height + "\n255\n")//.getBytes() missing for converting the string into bytes;
+			// For P6 there is no \n after each spec. Use:  new ("P6 "+width+" "+h+" 255\n").getBytes())
 			os.write(header);
 			os.write(data);
 		} catch (IOException e) {
